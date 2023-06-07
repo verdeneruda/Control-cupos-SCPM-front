@@ -1,0 +1,179 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+    <div>
+        <div class="tamañotabla">
+
+
+            <h3> AGREGAR LICENCIA</h3>
+            <div class="form-add-license">
+
+                <form class="form-control" autocomplete="off" [formGroup]="addLicenseForm" (ngSubmit)="onSave()">
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Expediente:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" 
+                                formControlName="expediente">
+                                <!--span ngIf="isValidField('expediente')" 
+                                class="form-text text-danger">
+                                    {{ getFieldErrors('expediente') }} </!--span-->
+                            </div>
+                        </div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Fecha Acto Administrativo que
+                            modifica:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="faadmonm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre del Importador:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="importador">
+                            </div>
+                        </div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Tipo de importador:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-3" formControlName="timport">
+                                <option value="1">95%</option>
+                                <option value="2">5%</option>
+                                <option value="3">No aplica</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Acto Administrativo No:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="aadmon">
+                            </div>
+                        </div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Producto / Proveedor:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="producto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Fecha Acto Administrativo:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="faadmon">
+                            </div>
+                        </div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Pais de Procedencia:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-3" formControlName="pais">
+                                <option value="53">Colombia</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Acto Administrativo que
+                            modifica:</label>
+                        <div class="col-sm-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" formControlName="aamodifica">
+                            </div>
+                        </div>
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Estado:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-3" formControlName="estado">
+                                <option>Vigente</option>
+                                <option>Vencido</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="botonlr">
+                        <button type="submit" class="btn btn-primary">Agregar licencia</button>
+                    </div>
+
+                </form>
+            </div>
+            <div style="margin-top: 5%;">
+                <div>
+                    <div style="text-align:center">
+                        <table class="table table table-striped ">
+                            <h2>CAMBIO MENOR / ORDINARIO</h2>
+                        </table>
+                    </div>
+                    <table class="table table table-striped mat-elevation-z8">
+                        <thead>
+
+                            <tr>
+
+                                <th scope="col"></th>
+                                <th scope="col">CAMBIO MENOR </th>
+                                <th scope="col">FECHA CAMBIO</th>
+                                <th scope="col">PRODUCTOR / PROVEEDOR </th>
+                                <th scope="col">PAIS DE PROCEDENCIA </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td>XXXXXXX</td>
+                                <td>08/05/2023</td>
+                                <td>CENTA (HK) LIMITED ZENGO / INTERNATIONAL LTD</td>
+                                <td>CHINA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="botonlr">
+                        <div style="margin: 10px;">
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <div style="margin: 10px;">
+                            <button type="button" class="btn btn-outline-primary">Añadir</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div style="margin-top: 5%;">
+
+
+                <div>
+                    <div style="text-align:center">
+                        <table class="table table table-striped ">
+                            <h2>HCFC CUPO ANUAL (KG)</h2>
+                        </table>
+
+                    </div>
+                    <table class="table table table-striped mat-elevation-z8">
+
+                        <tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td>HCFC-22</td>
+                                <td>8292.25</td>
+                                <td>HCFC-22</td>
+                                <td>HCFC-22</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <div class="botonlr">
+
+                        <div style="margin: 10px;">
+                            <button type="button" class="btn btn-outline-primary">Editar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>

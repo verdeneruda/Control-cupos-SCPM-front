@@ -1,0 +1,146 @@
+.form_register {
+    width: 80%;
+    height: 85%;
+    opacity: 1;
+    top: 5%;
+
+}
+
+.userMail {
+    display: flex;
+    margin-top: 0%;
+    max-width: 30%;
+    width: 300px;
+    position: absolute;
+    top: 33%;
+    left: 40%;
+
+}
+.userName {
+    display: flex;
+    margin-top: 0%;
+    max-width: 30%;
+    width: 300px;
+    position: absolute;
+    top: 43%;
+    left: 40%;
+
+}
+
+.btn_group {
+    width: 30%;
+    position: absolute;
+    top: 15%;
+    left: 55%;
+    font-size: 10px;
+}
+
+.pass1 {
+    display: flex;
+    margin-top: 0%;
+    max-width: 30%;
+    width: 300px;
+    position: absolute;
+    top: 53%;
+    left: 40%;
+
+}
+
+.btn_login {
+    background: rgba(57, 170, 53, 1);
+    opacity: 1;
+    position: absolute;
+    top: 73%;
+    left: 45%;
+
+}
+
+.checkBox1 {
+    width: 75px;
+    color: rgba(179, 179, 179, 1);
+    position: absolute;
+    top: 52%;
+    left: 40%;
+    font-family: Sans Serif Collection;
+    font-weight: Regular;
+    font-size: 10px;
+    opacity: 1;
+    text-align: left;
+}
+
+
+.bg {
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+
+}
+
+.bg_01 {
+
+    width: 40%;
+    height: 65%;
+    background: rgba(241, 251, 239, 1);
+    opacity: 1;
+    position: absolute;
+    top: 12%;
+    left: 30%;
+}
+
+.bg_green {
+    width: 20%;
+    height: 65%;
+    background: rgba(57, 170, 53, 1);
+    opacity: 1;
+    position: absolute;
+    top: 12%;
+    left: 15%;
+}
+
+.l_anla {
+    width: 16%;
+    height: 15%;
+    background: url("../../assets/img/anla.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    /* opacity: 1; */
+    position: absolute;
+    top: 20%;
+    left: 18%;
+}
+
+.l_eco {
+    width: 19%;
+    height: 32%;
+    background: url("../../assets/img/eco.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    top: 45%;
+    left: 15.5%;
+}
+
+.txt_cupos {
+    width: 45%;
+    color: rgba(35, 35, 35, 1);
+    position: absolute;
+    top: 28%;
+    left: 40%;
+    font-family: Sans Serif Collection;
+    font-size: 20px;
+    text-align: left;
+}
+
+.profileN {
+    display: flex;
+    margin-top: 0%;
+    max-width: 30%;
+    width: 300px;
+    position: absolute;
+    top: 63%;
+    left: 40%;
+
+}

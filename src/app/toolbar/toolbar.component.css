@@ -1,0 +1,23 @@
+.header_Sheet {
+  width: 100%;
+  height: 15%;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  transform: rotate(-180deg);
+}
+.toolbarP {
+  width: 100%;
+  position: absolute;
+  top: 10%;
+}
+
+
+#sp-barra-azul {
+  background-color: #3366CC;
+  padding: 8px 0px 8px 0px;
+}
+
+#sp-logo-anla-buscar {
+  padding: 20px 0px 20px 0px;
+}

@@ -1,0 +1,56 @@
+<app-toolbar></app-toolbar>
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="container">
+    <div class="tamañotabla">
+        <div style="margin-top: 3%;">
+            <div>
+                <div style="text-align:center">
+                    <h3>LISTADO NOTIFICACIONES</h3>
+                </div>
+                <!--filtrado de la tabla-->
+                <mat-form-field>
+                    <mat-label>Filtro</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input autocomplete="off">
+                </mat-form-field>
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                    <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="rol-permiso">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol - Permiso </th>
+                        <td mat-cell *matCellDef="let element"> {{element.idRolPermiso}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="mensaje">
+                        <th mat-header-cell *matHeaderCellDef> Mensaje </th>
+                        <td mat-cell *matCellDef="let element"> {{element.contenidoMensaje}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="aplica">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aplica Importador </th>
+                        <td mat-cell *matCellDef="let element"> {{element.aplicaImportador}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="accion">
+                        <th mat-header-cell *matHeaderCellDef> 
+                            <button [routerLink]="['/add-notification']" class="agregar" mat-raised-button color="primary">Agregar Notificación</button>    
+                        </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <mat-icon routerLink="/notification/{{ element.id }}" matTooltip="Editar" class="edit" fontIcon="edit"></mat-icon>    
+                            <mat-icon  matTooltip="Eliminar" class="delete" fontIcon="delete"></mat-icon>    
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </div>

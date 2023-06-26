@@ -1,0 +1,56 @@
+<app-toolbar></app-toolbar>
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="container">
+    <div class="tamañotabla">
+
+<div class="form-add-license">
+    <form class="form-control" autocomplete="off">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Sustancia:</label>
+            <div class="col-sm-9">
+                <select class="form-control mb-3" name="sustancia1">
+                    <option  selected [(ngModel)]="listSubstance.sustancia1" >{{listSubstance.sustancia1}}</option>
+                    <option>HCFC-22</option>
+                    <option>HCFC-142b</option>
+                    <option>HCFC-123</option>
+                    <option>HFCF-124</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Subpartida</label>
+            <div class="col-sm-9">
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" [(ngModel)]="listSubstance.subpartida" name="subpartida" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Tipo:</label>
+            <div class="col-sm-9">
+                <select class="form-control mb-3" name="tipo" >
+                    <option selected [(ngModel)]="listSubstance.tipo" >{{listSubstance.tipo}}</option>
+                    <option>HCFC</option>
+                    <option>HFC</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Descripción:</label>
+            <div class="col-sm-9">
+                <div class="input-group mb-3" >
+                    <input type="text" class="form-control" [(ngModel)]="listSubstance.descripcion" name="descripcion"/>
+                </div>
+            </div>
+        </div>
+        <div class="botonlr" >
+        <button (click)="updatedSubstance()" class="btn btn-primary">Actualizar</button>
+        <button routerLink="/add-substance" type="button" class="btn btn-secondary">
+            Regresar
+        </button>
+    </div>
+    </form>
+</div>
+
+    </div></div>

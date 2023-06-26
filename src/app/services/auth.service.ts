@@ -3,22 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, map } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../environments/environments';
 
 
 interface LoginResponse {
   access_token: string;
   token: string;
+  idRole: string
+  full_name: string
 }
 
-interface LicenseResponse {
-  access_token: string;
-}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000';
+  private apiUrl:string = environment.endpoint
   private apiUrl2 = 'https://localhost:5002';
 
   constructor(
@@ -36,10 +37,13 @@ export class AuthService {
 
   public login(username: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
-      tap(response => sessionStorage.setItem('access_token', response.access_token))
+      tap(response => sessionStorage.setItem('access_token', response.access_token)
+      ),tap(response => sessionStorage.setItem('isRole', response.idRole)
+      ),tap(response => sessionStorage.setItem('fullName', response.full_name)
+      )
+      
     );
   }
-
 
 
   isLoggedIn() {
@@ -54,20 +58,16 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return !!sessionStorage.getItem('access_token');
   }
-  /// endpoint licencias
-  public addLicense(dataAddLicense:any ): Observable<LicenseResponse> {
-    return this.http.post<LicenseResponse>(`${this.apiUrl}/api/Licencia/Add`, {dataAddLicense})
+
+  public isRole(){
+    return sessionStorage.getItem('isRole')
+  
   }
 
-  public getLicence (): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl2}/api/Licencia`)
+  public fullName(){
+    return sessionStorage.getItem('fullName')
+  
   }
-
-  /// endpoint sustancias
-  public getSubstance (): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl2}/api/Sustancia`)
-  }
-
 
 
 
@@ -75,4 +75,6 @@ export class AuthService {
 function jwt_decode(token: string | null) {
   throw new Error('Function not implemented.');
 }
+
+
 

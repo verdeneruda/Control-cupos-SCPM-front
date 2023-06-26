@@ -2,82 +2,69 @@
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { LoginComponent } from './login/login.component';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AuthInterceptor } from './auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './auth.interceptor';
+
+
+//componentes
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SearchLicenceComponent } from './pages/search-licence/search-licence.component';
+import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
+import { UpdateYearComponent } from './pages/update-year/update-year.component';
+import { DiscountsComponent } from './pages/discounts/discounts.component';
+import { AddLicenseComponent } from './pages/add-license/add-license.component';
+import { UsersComponent } from './pages/admin/users/users.component';
+import { LogsComponent } from './pages/admin/logs/logs.component';
+import { UpdateSubstanceComponent } from './pages/substance/update-substance/update-substance.component';
+import { UpdateUComponent } from './pages/admin/users/update-u/update-u.component';
+import { NotificationComponent } from './pages/admin/notification/notification.component';
 
 // requiere instalacion npm i @auth0/angular-jwt
 import { JwtModule } from '@auth0/angular-jwt';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { RegisterComponent } from './register/register.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import {MatIconModule} from '@angular/material/icon';
-import { SearchLicenceComponent } from './search-licence/search-licence.component';
-import { EditLicenceComponent } from './edit-licence/edit-licence.component';
-import { AddSubstanceComponent } from './add-substance/add-substance.component';
-import { UpdateYearComponent } from './update-year/update-year.component';
-import { DiscountsComponent } from './discounts/discounts.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatListModule} from '@angular/material/list';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
-import { AddLicenseModule } from './pages/add-license/add-license.module';
-import { AddLicenseComponent } from './pages/add-license/add-license.component';
-import { ToolbarModule } from './toolbar/toolbar.module';
-import { AdministracionComponent } from './pages/administracion/administracion.component';
+import { DataTablesModule } from "angular-datatables";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from './shared/shared.module';
+import { AddNotificationComponent } from './pages/admin/notification/add-notification/add-notification.component';
+import { EditLicenceComponent } from './pages/edit-licence/edit-licence.component';
+
+
 
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    ToolbarComponent,
     SearchLicenceComponent,
     EditLicenceComponent,
     AddLicenseComponent,
     AddSubstanceComponent,
     UpdateYearComponent,
     DiscountsComponent,
-    AdministracionComponent,
+    UsersComponent,
+    LogsComponent,
+    UpdateSubstanceComponent,
+    UpdateUComponent,
+    NotificationComponent,
+    AddNotificationComponent,
   ],
   imports: [
     
     BrowserModule,
+    DataTablesModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     FormsModule,
-    MatInputModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatButtonToggleModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatListModule,
-    MatSnackBarModule,
-    MatTableModule,
+    SharedModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

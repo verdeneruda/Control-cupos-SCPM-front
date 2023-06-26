@@ -1,0 +1,43 @@
+<app-toolbar></app-toolbar>
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="container">
+    <div class="tamañotabla">
+        <h3> Registro de Notificaciónes </h3>
+        <div class="form-add">
+            <form class="form-control" [formGroup]="formAddNotify" autocomplete="off" (ngSubmit)="onSaveNotify()">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-3 col-form-label">Rol - Permiso</label>
+                    <div class="col-sm-9">
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" formControlName="idRolPermiso" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-3 col-form-label">Mensaje:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" formControlName="contenidoMensaje" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-3 col-form-label">Aplica Importador:</label>
+                    <div class="col-sm-9">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="aplicaImportador" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Activo
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="botonlr">
+                    <button type="submit" class="btn btn-primary">Agregar Notificación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

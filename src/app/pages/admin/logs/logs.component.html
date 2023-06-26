@@ -1,0 +1,32 @@
+<app-toolbar></app-toolbar>
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="container">
+    <div class="tamañotabla">
+<div style="margin-top: 3%;">
+    <div>
+        <div style="text-align:center">
+                <h3>REGISTRO DE ACTIVIDAD</h3>
+        </div>
+
+        <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger"
+            class="table table-striped row-border hover">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">USUARIO </th>
+                    <th scope="col">ACCION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of logs">
+                    <th scope="row"></th>
+                    <td>{{item.usuarioCuenta}}</td>
+                    <td>{{item.identificacion}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+</div>
+</div>
+    </div>
+</div>

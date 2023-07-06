@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from '../environments/environments';
+import { Provider } from '../interfaces/provider';
 
 interface LicenseResponse {
   access_token: string;
@@ -11,7 +13,7 @@ interface LicenseResponse {
 })
 
 export class LicenseService {
-  private apiUrl2 = 'https://localhost:5002';
+  private appUrl = environment.apiURL
 
   constructor(
     private http: HttpClient, 
@@ -19,11 +21,19 @@ export class LicenseService {
 
     /// endpoint licencias
     public addLicense(dataAddLicense:any ): Observable<LicenseResponse> {
-      return this.http.post<LicenseResponse>(`${this.apiUrl2}/api/Licencia/Add`, {dataAddLicense})
+      return this.http.post<LicenseResponse>(`${this.appUrl}/api/Licencia/Add`, {dataAddLicense})
     }
   
     public getLicence (): Observable<any> {
-      return this.http.get<any>(`${this.apiUrl2}/api/Licencia`)
+      return this.http.get<any>(`${this.appUrl}/api/Licencia`)
+    }
+
+    public addProvider(provider:any ): Observable<Provider> {
+      return this.http.post<Provider>(`${this.appUrl}/api/Proveedor/Add`, {provider})
+    }
+
+    public getProvider (): Observable<any> {
+      return this.http.get<any>(`${this.appUrl}/api/Proveedor`)
     }
 
 

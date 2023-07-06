@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Discounts } from '../interfaces/discounts';
 import { License } from '../interfaces/license';
+import { environment } from '../environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { License } from '../interfaces/license';
 export class DiscountsService {
   private apiUrl2 = 'https://localhost:5002';
   private apiUrl = 'http://localhost:8182/licenses';
+  private appUrl2 = environment.apiURL
   private _refresh$ = new Subject<void>;
 
   constructor(private http: HttpClient) { }

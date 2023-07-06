@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, map } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -14,13 +14,16 @@ interface LoginResponse {
 }
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private apiUrl:string = environment.endpoint
-  private apiUrl2 = 'https://localhost:5002';
+  private listRole: string = ''
+  private appUrl2 = environment.endpoint
+  private appUrl = environment.apiURL
+  private apiUrl = '/api/Login/authenticate'
 
   constructor(
     private http: HttpClient, 
@@ -29,22 +32,34 @@ export class AuthService {
 
 
 
-/* public login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
-      tap(response => localStorage.setItem('token', response.token))
-    );
-  }*/
 
-  public login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { username, password }).pipe(
-      tap(response => sessionStorage.setItem('access_token', response.access_token)
-      ),tap(response => sessionStorage.setItem('isRole', response.idRole)
+  public login2(username: string, password: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(this.appUrl2+this.apiUrl)
+    return this.http.post<any>(`${this.appUrl2}/login`, { username, password }, {headers: headers})
+    .pipe(
+      tap(response => sessionStorage.setItem('access_token', response.token)
+      ),tap(response => sessionStorage.setItem('isRole', response.listRole)
       ),tap(response => sessionStorage.setItem('fullName', response.full_name)
       )
-      
+
     );
+    
   }
 
+  public login(email: string, password: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(this.appUrl+this.apiUrl)
+    return this.http.post<any>(`${this.appUrl}/api/Login/authenticate`, { email, password }, {headers: headers})
+    .pipe(
+      tap(response => sessionStorage.setItem('access_token', response.token)
+      ),tap(response => sessionStorage.setItem('isRole', response.login.rolUsuario.id)
+      ),tap(response => sessionStorage.setItem('fullName', response.login.usuario.nombres)
+      ),tap(response => sessionStorage.setItem('idUser', response.login.usuario.id)
+      )
+    );
+    
+  }
 
   isLoggedIn() {
     const token = sessionStorage.getItem('access_token');
@@ -69,7 +84,9 @@ export class AuthService {
   
   }
 
-
+  public idUser(){
+    return sessionStorage.getItem('idUser')
+  }
 
 }
 function jwt_decode(token: string | null) {

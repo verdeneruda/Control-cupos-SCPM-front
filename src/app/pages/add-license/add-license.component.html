@@ -15,63 +15,49 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" 
                                 formControlName="expediente">
-                                <!--span ngIf="isValidField('expediente')" 
-                                class="form-text text-danger">
-                                    {{ getFieldErrors('expediente') }} </!--span-->
                             </div>
                         </div>
                         <label for="staticEmail" class="col-sm-3 col-form-label">Fecha Acto Administrativo que
                             modifica:</label>
                         <div class="col-sm-3">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" formControlName="faadmonm">
+                                <input type="datetime-local" class="form-control" formControlName="faadmonm">
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">Nombre del Importador:</label>
                         <div class="col-sm-3">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" formControlName="importador">
-                            </div>
-                        </div>
-                        <label for="staticEmail" class="col-sm-3 col-form-label">Tipo de importador:</label>
-                        <div class="col-sm-3">
-                            <select class="form-control mb-3" formControlName="timport">
-                                <option value="1">95%</option>
-                                <option value="2">5%</option>
-                                <option value="3">No aplica</option>
+                            <select class="form-control mb-3" formControlName="importador">
+                                <option *ngFor="let item of importer" [value]="item.id">{{ item.nombreImportador }} </option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">Acto Administrativo No:</label>
                         <div class="col-sm-3">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" formControlName="aadmon">
                             </div>
                         </div>
-                        <label for="staticEmail" class="col-sm-3 col-form-label">Producto / Proveedor:</label>
-                        <div class="col-sm-3">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" formControlName="producto">
-                            </div>
-                        </div>
+                    
                     </div>
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-3 col-form-label">Fecha Acto Administrativo:</label>
+                        
+                        
+                        <label for="faadmon" class="col-sm-3 col-form-label">Fecha Acto Administrativo:</label>
                         <div class="col-sm-3">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" formControlName="faadmon">
+                                <input type="datetime-local" class="form-control" formControlName="faadmon">
                             </div>
                         </div>
                         <label for="staticEmail" class="col-sm-3 col-form-label">Pais de Procedencia:</label>
                         <div class="col-sm-3">
                             <select class="form-control mb-3" formControlName="pais">
-                                <option value="53">Colombia</option>
+                                <option *ngFor="let item of country" [value]="item.id">{{ item.nombrePais }} </option>
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="staticEmail" class="col-sm-3 col-form-label">Acto Administrativo que
                             modifica:</label>
@@ -83,9 +69,26 @@
                         <label for="staticEmail" class="col-sm-3 col-form-label">Estado:</label>
                         <div class="col-sm-3">
                             <select class="form-control mb-3" formControlName="estado">
-                                <option>Vigente</option>
-                                <option>Vencido</option>
+                                <option value=true>Vigente</option>
+                                <option value=false>Vencido</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Producto / Proveedor:</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" multiple aria-label="multiple select example" formControlName="producto">
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="7">seven</option>
+                                <option value="8">Five</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                        <button [routerLink]="['/add-importer']" class="agregar" mat-raised-button color="primary">
+                            <mat-icon>add_circle_outline</mat-icon>Agregar Proveedor</button>
                         </div>
                     </div>
                     <div class="botonlr">
@@ -94,6 +97,7 @@
 
                 </form>
             </div>
+            {{addLicenseForm.value | json}}
             <div style="margin-top: 5%;">
                 <div>
                     <div style="text-align:center">
@@ -103,9 +107,7 @@
                     </div>
                     <table class="table table table-striped mat-elevation-z8">
                         <thead>
-
                             <tr>
-
                                 <th scope="col"></th>
                                 <th scope="col">CAMBIO MENOR </th>
                                 <th scope="col">FECHA CAMBIO</th>

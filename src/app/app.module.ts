@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthInterceptor } from './auth.interceptor';
+import { AuthInterceptor } from './utils/auth.interceptor';
 
 
 //componentes
@@ -13,13 +13,11 @@ import { AuthInterceptor } from './auth.interceptor';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SearchLicenceComponent } from './pages/search-licence/search-licence.component';
-import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
 import { UpdateYearComponent } from './pages/update-year/update-year.component';
 import { DiscountsComponent } from './pages/discounts/discounts.component';
 import { AddLicenseComponent } from './pages/add-license/add-license.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { LogsComponent } from './pages/admin/logs/logs.component';
-import { UpdateSubstanceComponent } from './pages/substance/update-substance/update-substance.component';
 import { UpdateUComponent } from './pages/admin/users/update-u/update-u.component';
 import { NotificationComponent } from './pages/admin/notification/notification.component';
 
@@ -32,6 +30,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/shared.module';
 import { AddNotificationComponent } from './pages/admin/notification/add-notification/add-notification.component';
 import { EditLicenceComponent } from './pages/edit-licence/edit-licence.component';
+import { SubstanceComponent } from './pages/substance/substance.component';
+import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
+import { ImporterComponent } from './pages/importer/importer.component';
+import { AddImporterComponent } from './pages/importer/add-importer/add-importer.component';
 
 
 
@@ -47,15 +49,17 @@ export function tokenGetter() {
     SearchLicenceComponent,
     EditLicenceComponent,
     AddLicenseComponent,
-    AddSubstanceComponent,
     UpdateYearComponent,
     DiscountsComponent,
     UsersComponent,
     LogsComponent,
-    UpdateSubstanceComponent,
     UpdateUComponent,
     NotificationComponent,
     AddNotificationComponent,
+    SubstanceComponent,
+    AddSubstanceComponent,
+    ImporterComponent,
+    AddImporterComponent,
   ],
   imports: [
     

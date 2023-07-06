@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotifyService } from 'src/app/services/notify.service';
+import { NotifyService } from 'src/app/services/notification.service';
 import { Notification } from 'src/app/interfaces/notification';
 
 
@@ -19,41 +19,43 @@ export class AddNotificationComponent {
   formAddNotify: FormGroup;
   id:number;
 
-  constructor(private notifyServices: NotifyService ,
+  constructor(private _notifyServices: NotifyService ,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private router: Router,
     private aRoute: ActivatedRoute) {
+      const idUser = sessionStorage.getItem('idUser')
       this.formAddNotify = this.fb.group({
         idRolPermiso: ['', Validators.required],
         contenidoMensaje: ['', Validators.required],
         aplicaImportador: [false, Validators.required],
+        usuarioCreacion: Number(idUser)
       })
       this.id = Number(this.aRoute.snapshot.paramMap.get('id'));
 
     }
 
   onSaveNotify(){
-
+    this.loading=true
     const notificacion: Notification = {
       idRolPermiso: this.formAddNotify.value.idRolPermiso,
       contenidoMensaje: this.formAddNotify.value.contenidoMensaje,
-      aplicaImportador: this.formAddNotify.value.aplicaImportador
-
+      aplicaImportador: this.formAddNotify.value.aplicaImportador,
+      usuarioCreacion: this.formAddNotify.value.usuarioCreacion
     }
-    console.log(this.formAddNotify)
     if(this.id != 0) {
+      this.loading=false
       notificacion.id = this.id;
       this.editNotify(this.id, notificacion);
     } else {
+      this.loading=false
       this.addNotify(notificacion);
     }
-    
   }
 
   editNotify(id: number, notification: Notification) {
     this.loading = true;
-    this.notifyServices.updateNotification(id, notification).subscribe(() => {
+    this._notifyServices.updateNotification(id, notification).subscribe(() => {
       this.loading = false;
       console.log('llegue')
       this.mensajeExito('actualizada');
@@ -62,7 +64,7 @@ export class AddNotificationComponent {
   }
   addNotify(notification: Notification) {
     this.loading = true;
-    this.notifyServices.addNotification(notification).subscribe(data => {
+    this._notifyServices.addNotification(notification).subscribe(data => {
       this.loading = false;
       this.mensajeExito('registrada');
       this.router.navigate(['/notification']);

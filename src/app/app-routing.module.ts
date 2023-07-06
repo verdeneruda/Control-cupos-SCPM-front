@@ -3,18 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { SearchLicenceComponent } from './pages/search-licence/search-licence.component';
 import { EditLicenceComponent } from './pages/edit-licence/edit-licence.component';
-import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
 import { UpdateYearComponent } from './pages/update-year/update-year.component';
 import { DiscountsComponent } from './pages/discounts/discounts.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AddLicenseComponent } from './pages/add-license/add-license.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { LogsComponent } from './pages/admin/logs/logs.component';
-import { UpdateSubstanceComponent } from './pages/substance/update-substance/update-substance.component';
 import { UpdateUComponent } from './pages/admin/users/update-u/update-u.component';
 import { RoleGuard } from './guards/role.guard';
 import { NotificationComponent } from './pages/admin/notification/notification.component';
 import { AddNotificationComponent } from './pages/admin/notification/add-notification/add-notification.component';
+import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
+import { SubstanceComponent } from './pages/substance/substance.component';
+import { AddImporterComponent } from './pages/importer/add-importer/add-importer.component';
+import { ImporterComponent } from './pages/importer/importer.component';
+
 
 
 
@@ -37,15 +40,28 @@ const routes: Routes = [
     path: 'add-license', component: AddLicenseComponent, canActivate: [AuthGuard]  
   },
   { 
+    path: 'add-substance/:id', component: AddSubstanceComponent, canActivate: [AuthGuard]  
+  },
+  { 
     path: 'add-substance', component: AddSubstanceComponent, canActivate: [AuthGuard]  
   },
   { 
-    path: 'update-substance/:id', component: UpdateSubstanceComponent, canActivate: [AuthGuard]  
+    path: 'substance', component: SubstanceComponent, canActivate: [AuthGuard]  
+  },
+  { 
+    path: 'add-importer/:id', component: AddImporterComponent, canActivate: [AuthGuard]  
+  },
+  { 
+    path: 'importer', component: ImporterComponent, canActivate: [AuthGuard]  
+  },
+  { 
+    path: 'add-importer', component: AddImporterComponent, canActivate: [AuthGuard]  
   },
   { 
     path: 'update-year', component: UpdateYearComponent, canActivate: [AuthGuard]  
   },
   { 
+    
     path: 'discounts', component: DiscountsComponent, canActivate: [AuthGuard]  
   },
   { 

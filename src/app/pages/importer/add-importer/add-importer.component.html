@@ -1,0 +1,48 @@
+<app-toolbar></app-toolbar>
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="container">
+<div class="tamañotabla">
+    <h2> {{ titleImporter }} Importador </h2>
+    <div class="form-add">
+        <form class="form-control" autocomplete="off" [formGroup]="addImporterForm" (ngSubmit)="onSave()">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Importador</label>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="nombreImportador">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-sm-3 col-form-label">Tipo Importador</label>
+                <div class="col-sm-9">
+                    <select class="form-control mb-3" formControlName="tipoImportador">
+                        <option value="1">95%</option>
+                        <option value="2">5%</option>
+                        <option value="3">No aplica</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Estado:</label>
+                <div class="col-sm-9">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" formControlName="estado" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Activo
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            {{addImporterForm.value | json}}
+            <div class="botonlr">
+                <button routerLink="/importer" class="btn btn-secondary">Volver</button>
+                <button type="submit" class="btn btn-primary">{{ titleImporter }} Importador</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+</div>

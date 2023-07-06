@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notification } from 'src/app/interfaces/notification';
-import { NotifyService } from 'src/app/services/notify.service';
+import { NotifyService } from 'src/app/services/notification.service';
 
 
 

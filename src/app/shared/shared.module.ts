@@ -23,6 +23,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from '../app-routing.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -51,6 +56,15 @@ import { AppRoutingModule } from '../app-routing.module';
     MatProgressBarModule,
     MatRadioModule,
     NgbModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    ToastrModule.forRoot(
+      {
+        timeOut: 4000,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true,
+      }
+    ), // ToastrModule added
     
   ],
   exports:[
@@ -74,6 +88,8 @@ import { AppRoutingModule } from '../app-routing.module';
     MatProgressBarModule,
     MatRadioModule,
     NgbModule,
+    BrowserAnimationsModule,
+    MatTooltipModule
     
   ]
 })

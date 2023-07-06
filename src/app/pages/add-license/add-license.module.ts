@@ -13,4 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
     
   ]
 })
-export class AddLicenseModule { }
+export class AddLicenseModule { 
+/// para llamar la fecha en formato requerido
+// fecha: this.form.value.fecha.toISOString()
+
+
+
+}

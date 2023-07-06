@@ -1,76 +1,109 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { SubstanceService } from '../../../services/substance.service';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-declare var window: any;
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Substance } from 'src/app/interfaces/substance';
+import { SubstanceService } from 'src/app/services/substance.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-substance',
   templateUrl: './add-substance.component.html',
   styleUrls: ['./add-substance.component.css']
 })
-export class AddSubstanceComponent implements OnInit {
+export class AddSubstanceComponent {
 
-  dtoptions: DataTables.Settings = {};
-  dtTrigger:Subject<any>=new Subject<any>();
   formModal: any;
   substance: any;
   subscription!: Subscription;
   loading: boolean = false;
+  id:number;
+  addSubstanceForm: FormGroup;
+  titleSubstance: string = 'Crear'
 
-  constructor(private substanceService: SubstanceService ,
-              private fb: FormBuilder,
-              private router: Router,
-              private _snackBar: MatSnackBar) { }
-
-  ngOnInit(): void {
-    
-    //List Substance
-    this.LoadSubstance();
-    //this.subscription = this.substanceService.refresh$.subscribe(()=>{
-      //this.LoadSubstance();
-    //});
-    this.dtoptions = {
-      pagingType: 'simple_numbers',
-      language:{
-        searchPlaceholder:'Buscar',
-        lengthMenu: 'Mostrar _MENU_ registros por pagina',
-        search: 'Buscar',
-        info: 'Mostrando la pagina _PAGE_ de _PAGES_'
-      },
-    };
-  }
-
-  LoadSubstance() {
-    this.loading = true;
-    this.substanceService.getSubstance().subscribe(res => {
-      this.substance = res;
-      this.loading = false;
-      this.dtTrigger.next(null);
-    });
-  }
-  
-  public addSubstanceForm: FormGroup = this.fb.group({
-    sustancia1 : ['', Validators.required ],
-    subpartida: ['', [Validators.required, Validators.min(1)] ],
-    tipo:['', [Validators.required] ],
-    descripcion:['', Validators.required ],
-  })
-
-  onSave() {
-    if(this.addSubstanceForm.valid){
-      this.loading = true;
-      this.substanceService.addSubstance(this.addSubstanceForm.value).subscribe(response => {
-        this.loading = false;
-        this._snackBar.open('Sustancia Creada.','',{
-          duration: 4000,
-          horizontalPosition:'right'
-        })
-        this.addSubstanceForm.reset();
+  constructor(private _substanceService: SubstanceService ,
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService,
+    private router: Router,
+    private aRoute: ActivatedRoute) {
+      const idUser = sessionStorage.getItem('idUser')
+      this.addSubstanceForm = this.fb.group({
+        sustancia1 : ['', Validators.required ],
+        subpartida: ['', [Validators.required, Validators.min(1)] ],
+        tipo:['', [Validators.required] ],
+        descripcion:['', Validators.required ],
+        usuarioCreacion: Number(idUser)
       })
+      this.id = Number(this.aRoute.snapshot.paramMap.get('id'))
     }
+
+    ngOnInit(): void {
+      
+      if(this.id != 0) {
+        this.titleSubstance= 'Actualizar';
+        this.loading=false
+        this.getSubstanceById(this.id)
+        //substance.id = this.id;
+        //this.editNotify(this.id, notificacion);
+      } else {
+        this.loading=false
+        //this.addSubstance(substance);
+      }
+      
+    }
+
+    getSubstanceById(id: number){
+      this.loading=true
+      this._substanceService.getSubstanceId(id).subscribe(data => {
+        this.addSubstanceForm.patchValue({
+          sustancia1: data.sustancia1,
+          subpartida: data.subpartida,
+          tipo: data.tipo,
+          descripcion: data.descripcion
+        })
+        this.loading=false
+      })
+
+    }
+
+    onSave(){
+      this.loading=true
+      const substance: Substance = {
+        sustancia1: this.addSubstanceForm.value.sustancia1,
+        subpartida: this.addSubstanceForm.value.subpartida,
+        tipo: this.addSubstanceForm.value.tipo,
+        descripcion: this.addSubstanceForm.value.descripcion,
+        usuarioCreacion: this.addSubstanceForm.value.usuarioCreacion
+      }
+
+      if (this.id !== 0) {
+        // Es editar 
+        substance.id = this.id;
+        this._substanceService.updateSubstance(this.id, substance).subscribe(() => {
+          this.toastr.info(`El Item ${substance.sustancia1} fue actualizado con exito`, 'Item actualizado');
+          this.loading = false;
+          this.router.navigate(['/substance']);
+        })
+  
+      } else {
+        // Es agregagar
+        this._substanceService.addSubstance(substance).subscribe(() => {
+          this.toastr.success(`El Item ${substance.sustancia1} fue registrado con exito`, 'Item registrado');
+          this.loading = false;
+          this.router.navigate(['/substance']);
+        })
+      }
+    }
+
+      // servicio crear
+  addSubstance(substance: Substance) {
+    this.loading = true;
+    this._substanceService.addSubstance(substance).subscribe(data => {
+      this.loading = false;
+      this.router.navigate(['/substance']);
+    })
   }
 
 }

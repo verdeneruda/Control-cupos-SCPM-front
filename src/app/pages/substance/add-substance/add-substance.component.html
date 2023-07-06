@@ -1,83 +1,53 @@
 <app-toolbar></app-toolbar>
 <app-spinner *ngIf="loading"></app-spinner>
-
 <div class="container">
-    <div class="tamañotabla">
+<div class="tamañotabla">
+    <h2> {{ titleSubstance }} Sustancia </h2>
+    <div class="form-add">
+        <form class="form-control" autocomplete="off" [formGroup]="addSubstanceForm" (ngSubmit)="onSave()">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Sustancia:</label>
+                <div class="col-sm-9">
+                    <select class="form-control mb-3" formControlName="sustancia1">
+                        <option>HCFC-22</option>
+                        <option>HCFC-142b</option>
+                        <option>HCFC-123</option>
+                        <option>HFCF-124</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Subpartida</label>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" formControlName="subpartida">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Tipo:</label>
+                <div class="col-sm-9">
+                    <select class="form-control mb-3" formControlName="tipo">
+                        <option>HCFC</option>
+                        <option>HFC</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
 
-        <h3> Sustancia </h3>
-        <div class="form-add-license">
-            <form class="form-control" autocomplete="off" [formGroup]="addSubstanceForm" (ngSubmit)="onSave()">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Sustancia:</label>
-                    <div class="col-sm-9">
-                        <select class="form-control mb-3" formControlName="sustancia1">
-                            <option>HCFC-22</option>
-                            <option>HCFC-142b</option>
-                            <option>HCFC-123</option>
-                            <option>HFCF-124</option>
-                        </select>
+                <label for="staticEmail" class="col-sm-3 col-form-label">Descripción:</label>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" formControlName="descripcion">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Subpartida</label>
-                    <div class="col-sm-9">
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" formControlName="subpartida">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Tipo:</label>
-                    <div class="col-sm-9">
-                        <select class="form-control mb-3" formControlName="tipo">
-                            <option>HCFC</option>
-                            <option>HFC</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Descripción:</label>
-                    <div class="col-sm-9">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" formControlName="descripcion">
-                        </div>
-                    </div>
-                </div>
-                <div class="botonlr">
-                    <button type="submit" class="btn btn-primary">Agregar Sustancia</button>
-                </div>
-            </form>
-        </div>
-        <div style="margin-top: 3%;">
-            <div>
-                <div style="text-align:center">
-                        <h3>LISTADO SUSTANCIAS</h3>
-                </div>
-
-                <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger"
-                    class="table table-striped row-border hover">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">SUSTANCIA </th>
-                            <th scope="col">SUBPARTIDA</th>
-                            <th scope="col">TIPO</th>
-                            <th scope="col">DESCRIPCION</th>
-                            <th scope="col">ACCION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of substance">
-                            <th scope="row"></th>
-                            <td>{{item.sustancia1}}</td>
-                            <td>{{item.subpartida}}</td>
-                            <td>{{item.tipo}}</td>
-                            <td>{{item.descripcion}}</td>
-                            <th><a class="btn btn-primary btn-sm" routerLink="/update-substance/{{item.id}}">Editar</a>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-        </div>
+            </div>
+            <div class="botonlr">
+                <button routerLink="/substance" class="btn btn-secondary">Volver</button>
+                <button type="submit" class="btn btn-primary">Agregar Sustancia</button>
+                
+            </div>
+        </form>
     </div>
+</div>
+</div>

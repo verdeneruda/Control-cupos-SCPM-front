@@ -6,12 +6,10 @@ describe('AddSubstanceComponent', () => {
   let component: AddSubstanceComponent;
   let fixture: ComponentFixture<AddSubstanceComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AddSubstanceComponent ]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AddSubstanceComponent]
+    });
     fixture = TestBed.createComponent(AddSubstanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

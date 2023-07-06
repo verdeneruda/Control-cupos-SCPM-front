@@ -1,4 +1,5 @@
 <section id="sp-barra-azul">
+  
 
   <div class="container">
     <div class="container-inner">
@@ -28,10 +29,13 @@
           </div>
         </div>
       </div>
+      
     </div>
+    
   </div>
 
 </section>
+<app-spinner *ngIf="loading"></app-spinner>
 <section id="sp-logo-anla-buscar">
 
   <div class="container">
@@ -97,22 +101,11 @@
         <div class="card-body p-5">
           <h1 class="fs-4 card-title fw-bold mb-4">Herramienta Control de Cupos SCPM</h1>
         <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="needs-validation" novalidate="" autocomplete="off">
-
-          <!--       <div class="btn_group">
-        <mat-button-toggle-group name="btn_group" aria-label="Font Style">
-          <mat-button-toggle value="bold" routerLink="/register" >Registrarse</mat-button-toggle>
-          <mat-button-toggle value="underline" disabled >Iniciar Sesion</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div> -->
-
           <div class="mb-3 form-label">
             <label class="mb-2 text-muted" for="email">Usuario</label>
             <br>
             <input matInput [(ngModel)]="username" name="username" type="email" class="form-control"  value="" required>
-
           </div>
-    
-
             <div class="mb-3">
               <div class="mb-2 w-100">
                 <label class="text-muted" for="password">Contraseña</label>

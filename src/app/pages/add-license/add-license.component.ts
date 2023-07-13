@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LicenseAdd } from 'src/app/interfaces/license';
 import { CountryService } from 'src/app/services/country.service';
 import { ImporterService } from 'src/app/services/importer.service';
 import { LicenseService } from 'src/app/services/license.service';
+import { SupplierService } from 'src/app/services/supplier.service';
 
 
 @Component({
@@ -14,67 +18,72 @@ export class AddLicenseComponent {
   loading: boolean = false;
   importer: any;
   country:any;
-  typeImporter: any;
-  firstSelectorItems: any[] | undefined;
-  secondSelectorItems: any[] | undefined;
+  provider: any;
   selectedFirstItem: any;
+  addLicenseForm: FormGroup;
+  id: number;
+  router: any;
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder, 
               private _licenseService: LicenseService,
               private _importerServices: ImporterService,
-              private _countryServices: CountryService) { }
+              private _countryServices: CountryService,
+              private _supplierServices: SupplierService,
+              private aRoute: ActivatedRoute,
+              private toastr: ToastrService,) {
+
+                const idUser = sessionStorage.getItem('idUser')
+                this.addLicenseForm = this.fb.group({
+                  nroExpediente : ['', Validators.required, ],
+                  nitEmpresa : ['', Validators.required],
+                  fechaActoAdtvoMod:['' , Validators.required],
+                  importadorId:[ , Validators.required ],
+                  nroActoAdtvo:['', [Validators.required] ],
+                  fechaActoAdtvo:['' , Validators.required],
+                  paisProcedencia: [ , Validators.required],
+                  nroActoAdtvoMod:['' , Validators.required],
+                  proveedores:['' , Validators.required],
+                  estado: [false , Validators.required],
+                  usuarioCreacion: Number(idUser)
+                })
+                this.id = Number(this.aRoute.snapshot.paramMap.get('id'))
 
 
-  public addLicenseForm: FormGroup = this.fb.group({
-    expediente : ['', Validators.required, Validators.min(1) ],
-    faadmonm:['', [Validators.required, Validators.minLength(3)] ],
-    importador:['', [Validators.required, Validators.minLength(3)] ],
-    aadmon:['' , Validators.required],
-    producto:['' , Validators.required],
-    faadmon:['' , Validators.required],
-    pais:['' , Validators.required],
-    aamodifica:['' , Validators.required],
-    estado:['' , Validators.required]
-
-  });
-
-  public addProviderForm: FormGroup = this.fb.group({
-    nombreProveedor : ['', Validators.required, Validators.min(3) ],
-
-  });
+              }
 
 
   onSave(): void {
     this.loading=true
-    console.log(this.addLicenseForm.value)
+    console.log(this.addLicenseForm.value) 
     if(this.addLicenseForm.valid){
-      
+      this.addLicenseForm.value.importadorId = parseInt(this.addLicenseForm.value.importadorId)
+      this.addLicenseForm.value.paisProcedencia = parseInt(this.addLicenseForm.value.paisProcedencia)
+      this.addLicenseForm.value.estado = Boolean(this.addLicenseForm.value.estado)
+      for (let i = 0; i< this.addLicenseForm.value.proveedores.length; i++){
+        this.addLicenseForm.value.proveedores[i] = parseInt(this.addLicenseForm.value.proveedores[i])
+      }
+      console.log('valor de arreglo'+this.addLicenseForm.value.proveedores[0])
       this._licenseService.addLicense(this.addLicenseForm.value).subscribe(response => {
-        alert('Licencia agregada exitosamente.')
+        this.toastr.success(`${this.addLicenseForm.value.nroExpediente} fue registrada con exito`, 'Item registrado');
+        this.addLicenseForm.reset();
       })
       this.loading=false
+    }else{
+      this.errorMessage = 'Verificar campos obligatorios del formulario';
+      this.toastr.error(this.errorMessage, 'Error!');
+        console.log('Error verificar json'+this.addLicenseForm)
+        this.loading=false
     }
-
-    this.addLicenseForm.reset();
   }
+
+  
 
   ngOnInit(): void {
 
     this.loadImporter();
     this.loadCountry();
-  }
-
-  addProvider(){
-    this.loading=true
-    console.log(this.addProviderForm.value)
-    if(this.addProviderForm.valid){
-      
-      this._licenseService.addProvider(this.addProviderForm.value).subscribe(response => {
-        alert('Proveedor agregad0 exitosamente.')
-      })
-      this.loading=false
-    }
-
+    this.loadProvider();
   }
 
   loadCountry(){
@@ -91,38 +100,21 @@ export class AddLicenseComponent {
       this.loading = false;
     });
   }
-  // Validaciones
-  isValidField(field:string) :Boolean | null{
-    return this.addLicenseForm.controls[field].errors
-    && this.addLicenseForm.controls[field].touched
-  }
 
-  onImporterChange(id:any) : void{
-    console.log('prueba en onChange'+id)
+  // Validaciones
+  // isValidField(field:string) :Boolean | null{
+  //   return this.addLicenseForm.controls[field].errors
+  //   && this.addLicenseForm.controls[field].touched
+  // }
+
+  loadProvider() {
     this.loading = true;
-    this._importerServices.getImporterId(id).subscribe(res => {
-      this.typeImporter = res;
+    this._supplierServices.getProvider().subscribe(res => {
+      this.provider = res;
       this.loading = false;
     });
     
     
-  }
-
-  getFieldErrors(field: string): string | null {
-    if (!this.addLicenseForm.controls[field])
-    return null;
-    const errors = this.addLicenseForm.controls[field].errors || {};
-
-    for (const key of Object.keys(errors)) {
-      switch(key) {
-        case 'required':
-          return 'Este Campo es Requerido';
-
-          case 'minlength':
-            return 'Minimo de caracteres requerido';
-      }
-    }
-    return ''
   }
 
 }

@@ -18,16 +18,17 @@ export interface License {
 export interface LicenseAdd {
     id?: number
     nroExpediente: string
-    nitEmpresa: string,
-    nombreImportador: string
+    nitEmpresa: string
+    importadorId: number
     nroActoAdtvo: number
     fechaActoAdtvo: Date
     fechaActoAdtvoMod: Date
     nroActoAdtvoMod: number
     paisProcedencia: number
     estado: boolean
+    proveedores?: []
     usuarioCreacion: number
-    proveedores: LicenseProv[]
+
 }
 
 export interface LicenseProv {

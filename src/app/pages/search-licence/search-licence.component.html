@@ -3,8 +3,56 @@
 
 <div class="container">
 
+    <div style="margin-top: 5%;">
+        <div>
+            <div style="text-align:center">
+                <h3>Listado de Licencias</h3>
+            </div>
+            <!--filtrado de la tabla-->
+            <mat-form-field>
+                <mat-label>Filtro</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input autocomplete="off">
+            </mat-form-field>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="Expediente">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Expediente </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nroExpediente}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Nombre Importador">
+                    <th mat-header-cell *matHeaderCellDef> Nombre Importador </th>
+                    <td mat-cell *matCellDef="let element"> {{element.importadorId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Nit Empresa">
+                    <th mat-header-cell *matHeaderCellDef> Nit Empresa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nitEmpresa}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Pais Procedencia">
+                    <th mat-header-cell *matHeaderCellDef> Pais Procedencia </th>
+                    <td mat-cell *matCellDef="let element"> {{element.paisProcedencia}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+
     <div class="row align-items-start">
-        <div class="col">
+        <!-- <div class="col">
             Expediente:
 
             <div class="input-group mb-3" style="width: 80%;">
@@ -23,15 +71,13 @@
             <div>&nbsp;</div>
             <button type="button" class="btn btn-primary">Buscar licencia</button>
         </div>
-    </div>
+    </div> -->
     <div class="tamañotabla">
         <h3> Resultado de la búsqueda </h3>
         <table class="table table table-striped  mat-elevation-z8 ">
             <thead>
-
             </thead>
             <tbody>
-
                 <tr>
                     <th scope="row"></th>
                     <td> - Expediente: </td>
@@ -130,9 +176,6 @@
         </table>
 
         <div style="margin-top: 5%;">
-
-
-
             <div>
                 <div style="text-align:center">
                     <table class="table table table-striped ">
@@ -200,57 +243,7 @@
 
 
         </div>
-        <div style="margin-top: 5%;">
-            <div>
-                <div style="text-align:center">
-                    <h3>Listado de Licencias</h3>
-                </div>
-                <!--filtrado de la tabla-->
-                <mat-form-field>
-                    <mat-label>Filtro</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input autocomplete="off">
-                </mat-form-field>
-
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-
-                    <!--- Note that these columns can be defined in any order.
-                        The actual rendered columns are set as a property on the row definition" -->
-
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="Expediente">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Expediente </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nroExpediente}} </td>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="Nombre Importador">
-                        <th mat-header-cell *matHeaderCellDef> Nombre Importador </th>
-                        <td mat-cell *matCellDef="let element"> {{element.nombreImportador}} </td>
-                    </ng-container>
-
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="Productor / Proveedor">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Importador </th>
-                        <td mat-cell *matCellDef="let element"> {{element.tipoImportador}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Pais Procedencia">
-                        <th mat-header-cell *matHeaderCellDef> 
-                            <button [routerLink]="['/add-notification']" class="agregar" mat-raised-button color="primary">Agregar Licencia</button>    
-                        </th>
-                        <td mat-cell *matCellDef="let element"> 
-                            <mat-icon routerLink="/notification/{{ element.id }}" matTooltip="Editar" class="edit" fontIcon="edit"></mat-icon>    
-                            <mat-icon  matTooltip="Eliminar" class="delete" fontIcon="delete"></mat-icon>    
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <mat-paginator [pageSizeOptions]="[5, 15, 30]" showFirstLastButtons
-                    aria-label="Select page of periodic elements">
-                </mat-paginator>
-            </div>
-        </div>
+        
     </div>
 
 

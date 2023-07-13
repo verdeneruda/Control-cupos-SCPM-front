@@ -14,7 +14,7 @@ import { LicenseService } from 'src/app/services/license.service';
 })
 export class SearchLicenceComponent implements OnInit {
 
-  displayedColumns: string[] = ['Expediente', 'Nombre Importador', 'Productor / Proveedor', 'Pais Procedencia'];
+  displayedColumns: string[] = ['Expediente', 'Nombre Importador', 'Nit Empresa', 'Pais Procedencia'];
   dataSource = new MatTableDataSource<LicenseAdd>();
   notify: any
   loading: boolean = false;
@@ -61,7 +61,6 @@ export class SearchLicenceComponent implements OnInit {
         this.loading = false;
       }
     )
-
   }
 
     // ciclo de vida Tabla

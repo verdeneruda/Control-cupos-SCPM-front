@@ -34,6 +34,8 @@ import { SubstanceComponent } from './pages/substance/substance.component';
 import { AddSubstanceComponent } from './pages/substance/add-substance/add-substance.component';
 import { ImporterComponent } from './pages/importer/importer.component';
 import { AddImporterComponent } from './pages/importer/add-importer/add-importer.component';
+import { SupplierComponent } from './pages/supplier/supplier.component';
+import { AddSupplierComponent } from './pages/supplier/add-supplier/add-supplier.component';
 
 
 
@@ -60,6 +62,8 @@ export function tokenGetter() {
     AddSubstanceComponent,
     ImporterComponent,
     AddImporterComponent,
+    SupplierComponent,
+    AddSupplierComponent,
   ],
   imports: [
     

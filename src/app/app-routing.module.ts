@@ -17,6 +17,8 @@ import { AddSubstanceComponent } from './pages/substance/add-substance/add-subst
 import { SubstanceComponent } from './pages/substance/substance.component';
 import { AddImporterComponent } from './pages/importer/add-importer/add-importer.component';
 import { ImporterComponent } from './pages/importer/importer.component';
+import { SupplierComponent } from './pages/supplier/supplier.component';
+import { AddSupplierComponent } from './pages/supplier/add-supplier/add-supplier.component';
 
 
 
@@ -61,7 +63,15 @@ const routes: Routes = [
     path: 'update-year', component: UpdateYearComponent, canActivate: [AuthGuard]  
   },
   { 
-    
+    path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard]  
+  },
+  { 
+    path: 'add-supplier/id:', component: AddSupplierComponent, canActivate: [AuthGuard]  
+  },
+  { 
+    path: 'add-supplier', component: AddSupplierComponent, canActivate: [AuthGuard]  
+  },
+  { 
     path: 'discounts', component: DiscountsComponent, canActivate: [AuthGuard]  
   },
   { 

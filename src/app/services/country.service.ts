@@ -9,7 +9,6 @@ import { environment } from '../environments/environments';
 })
 export class CountryService {
   
-  private apiUrl2 = 'https://localhost:5002';
   private appUrl2 = environment.apiURL
   
 
